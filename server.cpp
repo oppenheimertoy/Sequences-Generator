@@ -9,6 +9,7 @@
 #include <iterator>
 #include "socket.h"
 #include "socket_ex.h"
+#include "generator.h"
 
 const int LISTEN_PORT = 8888;
 const int  amount_of_clients = 20;
@@ -17,7 +18,7 @@ int main(){
     std::vector<int> client_sockets(amount_of_clients, 0);
     // set of sockets
     fd_set socket_descriptors;
-    std::string message_server = "This is server!";
+    std::string message_server = "This is message from server!\n";
     int max_sd, addrlen;
     char buffer[1025];
     struct sockaddr_in address;
@@ -25,6 +26,7 @@ int main(){
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons( LISTEN_PORT);
     Socket server_socket;
+    client_seq generator_it;
     try{
         // create  server socket
         server_socket = Socket(AF_INET , SOCK_STREAM , 0);
@@ -70,6 +72,7 @@ int main(){
                 }
             }
             [[maybe_unused]] int read_input;
+            std::string input_buf;
             for (auto &des_sock: client_sockets) {
                 Socket it_socket;
                 it_socket.set_socket_inf(des_sock);
@@ -85,7 +88,12 @@ int main(){
                         des_sock = 0;
                     } else {
                         buffer[read_value] = '\0';
-                        it_socket.send(buffer, strlen(buffer), 0);
+                        std::string output;
+                        input_buf.append(buffer);
+                        std::string command(input_buf.substr(0, (read_value - 2)));
+                        command = command + "\n";
+                        output = generator_it.run_command(command, des_sock);
+                        it_socket.send(output.c_str(), (int)(output.size()), 0);
                     }
                 }
             }

@@ -19,6 +19,7 @@ private:
 public:
     client_seq();
     ~client_seq();
+    // analyse command from client
     std::string run_command(const std::string &command, int socket_num);
     std::string generate_seq(int sock_num, int num, uint64_t start, uint64_t step);
     std::string print_seq(int socket_num);

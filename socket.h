@@ -22,6 +22,7 @@ public:
     Socket();
     Socket(int des_p);
     Socket(int domain, int type, int protocol); // create new socket
+    ~Socket(){};
     // getter and setter
     int get_socket_inf();
     void set_socket_inf(int des_p);
