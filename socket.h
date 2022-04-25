@@ -42,12 +42,6 @@ public:
     bool is_valid(){
         return inf_sock != -1;
     };
-    //returns one or more addrinfo structures,
-    //       each of which contains an Internet address that can be specified
-    //       in a call to bind or connect.
-    static void get_addr_func(const char *node, const char *service, const addrinfo *hints, addrinfo **resul);
-    // free one or more addrinfo structures returned by getaddrinfo()
-    static void free_addr_func(addrinfo *ai);
     // socket functions (close and check status)
     bool status();
     void close();
