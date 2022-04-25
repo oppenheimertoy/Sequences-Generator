@@ -99,20 +99,6 @@ int Socket::read(void *buf, const int count){
     }
     return checker;
 }
-
-void Socket::get_addr_func(const char *node, const char *service, const addrinfo *hints, addrinfo **result){
-    int checker = getaddrinfo(node, service,hints, result);
-    if(!is_valid_param(checker)){
-        throw SocketEx(errno);
-    }
-}
-
-void Socket::free_addr_func(addrinfo *ai){
-    if(ai){
-        freeaddrinfo(ai);
-    }
-    ai = nullptr;
-}
 bool Socket::status() {
     return is_valid_param(inf_sock) && inf_sock;
 }
