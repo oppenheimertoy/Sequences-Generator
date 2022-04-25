@@ -71,9 +71,9 @@ std::string client_seq::print_seq(int socket_num){
             }
         }
     }
-    int max = std::max(std::max(seq1.seq.size(),seq2.seq.size()), seq3.seq.size());
+    long unsigned int max = std::max(std::max(seq1.seq.size(),seq2.seq.size()), seq3.seq.size());
     std::string output_msg;
-    for(int i = 0; i < max; ++i){
+    for(long unsigned int i = 0; i < max; ++i){
         if(seq1.seq.size() > i){
             output_msg.append(seq1.seq[i]);
         }else{

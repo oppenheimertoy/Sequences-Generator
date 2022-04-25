@@ -7,4 +7,4 @@ SocketEx::SocketEx(const char *what) : std::runtime_error(what), exception_code(
 
 SocketEx::SocketEx(const std::string &what) : std::runtime_error(what), exception_code(0) {}
 
-SocketEx::SocketEx(int code) : std::runtime_error(std::strerror(exception_code)), exception_code(exception_code) {}
+SocketEx::SocketEx(int code) : std::runtime_error(std::strerror(code)), exception_code(code) {}
