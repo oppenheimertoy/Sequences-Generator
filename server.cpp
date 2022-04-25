@@ -18,7 +18,7 @@ int main(){
     std::vector<int> client_sockets(amount_of_clients, 0);
     // set of sockets
     fd_set socket_descriptors;
-    std::string message_server = "This is message from server!\n";
+    std::string message_server = "You have successfully connected!\n";
     int max_sd, addrlen;
     char buffer[1025];
     struct sockaddr_in address;
