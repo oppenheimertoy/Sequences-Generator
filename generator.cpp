@@ -2,13 +2,13 @@
 // Created by oppy on 25.04.22.
 //
 #include <regex>
-#include<iostream>
+#include <iostream>
 #include <cmath>
 #include <limits.h>
 
 #include "generator.h"
 
-const unsigned long long MAX_NUM = 100;
+const unsigned long long MAX_NUM = 10000;
 
 client_seq::client_seq(){
 }
