@@ -13,4 +13,3 @@ run:
 
 clean:
 	rm $(BIN_OUT)
-	rm $(OBJ_FILE)
