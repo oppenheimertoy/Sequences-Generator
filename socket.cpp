@@ -63,14 +63,6 @@ int Socket::send(const void *buf, int len, int flags){
     }
     return checker;
 }
-/*int Socket::sendto(const void *buf, const int len, const int flags, sockaddr *src_adr, socklen_t *adr_len){
-    int checker = ::sendto(inf_sock, buf, len, flags, src_adr, adr_len);
-    if(!is_valid_param(checker)){
-        throw SocketEx(errno);
-    }
-    return checker;
-}
- */
 int Socket::recv(void *buf, const int len, const int flags){
     int checker = ::recv(inf_sock, buf, len, flags);
     if(!is_valid_param(checker)){

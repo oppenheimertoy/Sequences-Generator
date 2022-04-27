@@ -17,7 +17,7 @@ client_seq::~client_seq(){
 }
 std::string client_seq::generate_seq(int sock_num, int num, uint64_t start, uint64_t step){
     sequence general;
-    std::string success_message = "Sequence ";
+    std::string success_message = "Sequence "; // message for success connection
     success_message = success_message + std::to_string(num);
     success_message += " generated!\n";
     if (num < 1 || num > 3){
@@ -30,7 +30,7 @@ std::string client_seq::generate_seq(int sock_num, int num, uint64_t start, uint
         general.seq.push_back(std::to_string(i));
     }
     general.num_seq = num;
-    generator_file.push_back(std::make_pair(sock_num,general));
+    generator_file.push_back(std::make_pair(sock_num,general)); // push new sequence to the generator file
     return success_message;
 }
 
@@ -41,6 +41,7 @@ std::string client_seq::run_command(const std::string &command, int socket_num){
     if (regex_search(command, pattern, regular_seq)){
         return generate_seq(socket_num, std::stoi(pattern[1]),(uint64_t)std::stoll(pattern[2]),(uint64_t)std::stoll(pattern[3]));
     }
+    // after export command - sending sequence to user socket
     if (regex_search(command, pattern, regular_export)){
         return print_seq(socket_num);
     }
@@ -73,6 +74,7 @@ std::string client_seq::print_seq(int socket_num){
     }
     long unsigned int max = std::max(std::max(seq1.seq.size(),seq2.seq.size()), seq3.seq.size());
     std::string output_msg;
+    // creation of output string
     for(long unsigned int i = 0; i < max; ++i){
         if(seq1.seq.size() > i){
             output_msg.append(seq1.seq[i]);

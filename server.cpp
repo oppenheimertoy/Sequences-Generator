@@ -26,7 +26,7 @@ int main(){
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons( LISTEN_PORT);
     Socket server_socket;
-    client_seq generator_it;
+    client_seq generator_it; // keeps all sequences
     try{
         // create  server socket
         server_socket = Socket(AF_INET , SOCK_STREAM , 0);
@@ -56,6 +56,7 @@ int main(){
             }
             Socket new_user;
             addrlen = sizeof(address);
+            // new user connection
             if (FD_ISSET(server_socket.get_socket_inf(), &socket_descriptors)) {
                 new_user.set_socket_inf(server_socket.accept((struct sockaddr *)&address, (socklen_t*)&addrlen));
                 std::cout << "New connection, user: " << new_user.get_socket_inf() << std::endl;
@@ -73,6 +74,7 @@ int main(){
             }
             [[maybe_unused]] int read_input;
             std::string input_buf;
+            // check all user sockets status
             for (auto &des_sock: client_sockets) {
                 Socket it_socket;
                 it_socket.set_socket_inf(des_sock);
